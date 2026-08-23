@@ -1,5 +1,7 @@
 target/
 src/main/resources/mongodb.properties
+src/main/resources/data/downloads/
+src/main/resources/data/extracted/
 PPR_*.txt
 .env
 .env.*

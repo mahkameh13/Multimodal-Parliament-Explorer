@@ -8,3 +8,4 @@
 * [Frontend and Visualizations](docs/frontend.md)
 * [Configuration](docs/configuration.md)
 * [Security](docs/security.md)
+* [Compliance and Reuse](docs/compliance.md)

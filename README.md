@@ -29,3 +29,11 @@ The documentation is organized as a GitBook-compatible set of Markdown pages in 
 ## Security
 
 Credentials are intentionally not stored in this repository. Keep `mongodb.properties`, environment files, private keys, and course-specific access files local. See [Security](docs/security.md).
+
+## Data and third-party software
+
+Bundestag data and media are not covered by the repository's software license. Review the [data and content notice](DATA_AND_CONTENT_NOTICE.md) before importing, redistributing, or publishing derived material. Direct dependency licenses are summarized in [third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Contributing and licensing status
+
+See [Contributing](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md). Until a root `LICENSE` file is added with authorization from all contributors, no permission to copy, modify, or redistribute this project is granted.
