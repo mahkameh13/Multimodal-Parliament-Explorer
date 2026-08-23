@@ -1,54 +1,49 @@
 package databaseSpeech;
 
-//import nlp.RedeCas;
 import nlp.RedeCas;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-public class Speech {
+import java.util.Objects;
 
-    private String speechId;
-    private String text;
-    private String speaker;
-    private String fraction;
+/**
+ * Immutable speech data required to create a UIMA CAS.
+ */
+public final class Speech {
+    private final String speechId;
+    private final String text;
+    private final String speaker;
+    private final String fraction;
 
-    //Konstruktor
-    public Speech(String speechId, String text, String speaker, String fraction){
-        this.speechId = speechId;
-        this.text = text;
-        this.speaker = speaker;
-        this.fraction = fraction;
+    public Speech(String speechId, String text, String speaker, String fraction) {
+        this.speechId = Objects.requireNonNullElse(speechId, "");
+        this.text = Objects.requireNonNullElse(text, "");
+        this.speaker = Objects.requireNonNullElse(speaker, "");
+        this.fraction = Objects.requireNonNullElse(fraction, "");
     }
 
-    public String getSpeechId(){
-        return this.speechId;
+    public String getSpeechId() {
+        return speechId;
     }
 
-    public String getText(){
-        return this.text;
+    public String getText() {
+        return text;
     }
 
-    public String getspeaker(){
-        return this.speaker;
+    public String getSpeaker() {
+        return speaker;
     }
 
-    public String getFraction(){
-        return this.fraction;
+    public String getspeaker() {
+        return getSpeaker();
     }
 
+    public String getFraction() {
+        return fraction;
+    }
 
-    //Übernommen und modifiziert aus alter Übung
-
-    /**
-     * @author: Hadia Syeda
-     * ToCas Methode
-     * @return
-     * @throws ResourceInitializationException
-     * @throws CASException
-     */
     public JCas toCAS() throws ResourceInitializationException, CASException {
-        return RedeCas.CasForRede(this.text
-        ,this.speechId, this.speaker, this.fraction);}
-
+        return RedeCas.CasForRede(text, speechId, speaker, fraction);
+    }
 }
