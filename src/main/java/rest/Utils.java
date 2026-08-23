@@ -13,15 +13,15 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 public class Utils {
-   static String collectionName = "speeches_nlp";
+   private static final String collectionName = "speeches_nlp";
 
    public static Document getSpeech(MongoDatabaseHandler db, String speechId) {
       Bson filter = Filters.eq("redeId", speechId);
       return db.readOne(collectionName, filter);
    }
 
-   public static List getSpeeches(MongoDatabaseHandler db, String speechIds) {
-      List<Document> speeches = new ArrayList();
+   public static List<Document> getSpeeches(MongoDatabaseHandler db, String speechIds) {
+      List<Document> speeches = new ArrayList<>();
 
       for(String speechId : speechIds.split(", ")) {
          speeches.add(getSpeech(db, speechId));
@@ -30,19 +30,20 @@ public class Utils {
       return speeches;
    }
 
-   public static List getAll(MongoDatabaseHandler db) {
-      List<Document> list = (List)db.getCollection(collectionName).find().into(new ArrayList());
+   public static List<Document> getAll(MongoDatabaseHandler db) {
+      List<Document> list = new ArrayList<>();
+      db.getCollection(collectionName).find().into(list);
       return list;
    }
 
-   public static Map getPosAgg(List list) {
-      List<Document> pos = new ArrayList();
+   public static Map<String, Integer> getPosAgg(List<Document> list) {
+      List<Document> pos = new ArrayList<>();
 
       for(Document d : list) {
          pos.add((Document)((Document)((Document)d.get("nlp", Document.class)).get("stats", Document.class)).get("posCounts", Document.class));
       }
 
-      Map<String, Integer> posCounts = new HashMap();
+      Map<String, Integer> posCounts = new HashMap<>();
 
       for(Document d : pos) {
          for(String key : d.keySet()) {
@@ -68,8 +69,8 @@ public class Utils {
       return sentimentAgg;
    }
 
-   public static Map getSentimentSpeech(List speeches) {
-      Map<String, Double> sentiments = new HashMap();
+   public static Map<String, Double> getSentimentSpeech(List<Document> speeches) {
+      Map<String, Double> sentiments = new HashMap<>();
 
       for(Document speech : speeches) {
          sentiments.put(speech.getString("redeId"), getSentimentSpeech(speech));
@@ -78,10 +79,10 @@ public class Utils {
       return sentiments;
    }
 
-   public static Map getEntities(Document speech) {
+   public static Map<String, Integer> getEntities(Document speech) {
       Document nlp = (Document)speech.get("nlp");
       List<Document> sentences = (List)nlp.get("sentences");
-      Map<String, Integer> entitiesCount = new HashMap();
+      Map<String, Integer> entitiesCount = new HashMap<>();
 
       for(Document sentence : sentences) {
          List<Document> entities = (List)sentence.get("entities");
@@ -96,24 +97,24 @@ public class Utils {
       return entitiesCount;
    }
 
-   public static Map getEntites(List speeches) {
-      Map<String, Integer> entitiesCount = new HashMap();
+   public static Map<String, Integer> getEntites(List<Document> speeches) {
+      Map<String, Integer> entitiesCount = new HashMap<>();
 
       for(Document speech : speeches) {
          Map<String, Integer> speechCount = getEntities(speech);
 
-         for(Map.Entry entry : speechCount.entrySet()) {
-            entitiesCount.merge((String)entry.getKey(), (Integer)entry.getValue(), Integer::sum);
+         for(Map.Entry<String, Integer> entry : speechCount.entrySet()) {
+            entitiesCount.merge(entry.getKey(), entry.getValue(), Integer::sum);
          }
       }
 
       return entitiesCount;
    }
 
-   public static Map getTopic(Document speech) {
+   public static Map<String, Double> getTopic(Document speech) {
       Document nlp = (Document)speech.get("nlp");
       List<Document> topicsDoc = (List)nlp.get("topicsTop5");
-      Map<String, Double> topicsMap = new HashMap();
+      Map<String, Double> topicsMap = new HashMap<>();
 
       for(Document topic : topicsDoc) {
          topicsMap.put((String)topic.get("category", String.class), (Double)topic.get("score", Double.class));
@@ -122,8 +123,8 @@ public class Utils {
       return topicsMap;
    }
 
-   public static Map getTopic(List speeches) {
-      Map<String, Double> topicsMap = new HashMap();
+   public static Map<String, Double> getTopic(List<Document> speeches) {
+      Map<String, Double> topicsMap = new HashMap<>();
 
       for(Document speech : speeches) {
          Map<String, Double> topics = getTopic(speech);
@@ -135,8 +136,8 @@ public class Utils {
       return topicsMap;
    }
 
-   public static List filterByTopic(List speeches, String topic) {
-      List<Document> resultList = new ArrayList();
+   public static List<Document> filterByTopic(List<Document> speeches, String topic) {
+      List<Document> resultList = new ArrayList<>();
 
       for(Document document : speeches) {
          Map<String, Double> map = getTopic(document);
@@ -149,11 +150,11 @@ public class Utils {
       return resultList;
    }
 
-   public static List filterByDateRange(List speeches, String fromDate, String toDate) {
+   public static List<Document> filterByDateRange(List<Document> speeches, String fromDate, String toDate) {
       if (fromDate == null && toDate == null) {
          return speeches;
       } else {
-         List<Document> result = new ArrayList();
+         List<Document> result = new ArrayList<>();
 
          for(Document d : speeches) {
             String date = d.getString("date");
@@ -170,9 +171,9 @@ public class Utils {
       }
    }
 
-   public static List filterByFraction(List speeches, String fraction) {
+   public static List<Document> filterByFraction(List<Document> speeches, String fraction) {
       if (fraction != null && !fraction.isBlank()) {
-         List<Document> result = new ArrayList();
+         List<Document> result = new ArrayList<>();
 
          for(Document d : speeches) {
             String f = d.getString("fraktion");

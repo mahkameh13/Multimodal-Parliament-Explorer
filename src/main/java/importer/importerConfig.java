@@ -7,13 +7,13 @@ import java.util.Properties;
 import java.util.Set;
 
 public class importerConfig {
-   private final Set ajaxBaseUrls;
+   private final Set<String> ajaxBaseUrls;
 
-   public importerConfig(Set ajaxBaseUrls) {
+   public importerConfig(Set<String> ajaxBaseUrls) {
       this.ajaxBaseUrls = ajaxBaseUrls;
    }
 
-   public Set getAjaxBaseUrls() {
+   public Set<String> getAjaxBaseUrls() {
       return this.ajaxBaseUrls;
    }
 
@@ -53,8 +53,8 @@ public class importerConfig {
       return new importerConfig(urls);
    }
 
-   private static Set parseCsvSet(String raw) {
-      Set<String> set = new LinkedHashSet();
+   private static Set<String> parseCsvSet(String raw) {
+      Set<String> set = new LinkedHashSet<>();
 
       for(String part : raw.split(",")) {
          String s = part.trim();

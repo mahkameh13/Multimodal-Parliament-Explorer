@@ -92,7 +92,7 @@ public class RedeNLP {
       }
    }
 
-   public void allRedeNLP(List redenList) throws ResourceInitializationException, CASException, IOException {
+   public void allRedeNLP(List<Speech> redenList) throws ResourceInitializationException, CASException, IOException {
       for(Speech rede : redenList) {
          this.RedeProcess(rede);
       }
@@ -103,7 +103,7 @@ public class RedeNLP {
       return (Document)this.documentMongoCollection.find(Filters.eq("redeId", speechId)).first();
    }
 
-   private JSONArray extractComments(List comments, String completeText, JCas jcas) {
+   private JSONArray extractComments(List<String> comments, String completeText, JCas jcas) {
       JSONArray commentArray = new JSONArray();
       if (comments == null) {
          return commentArray;

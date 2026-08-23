@@ -15,7 +15,7 @@ public class ExtractSpeeches {
       String legislatureperiod = text(d.selectFirst("wahlperiode"));
       String session = firstNonEmpty(text(d.selectFirst("sitzungsnr")), text(d.selectFirst("sitzungsnummer")));
       String date = firstNonEmpty(text(d.selectFirst("datum")), text(d.selectFirst("sitzungsdatum")));
-      List<ParsedSpeech> speeches = new ArrayList();
+      List<ParsedSpeech> speeches = new ArrayList<>();
 
       for(Element speech : d.select("rede")) {
          String speechId = firstNonEmpty(attr(speech, "id"), attr(speech, "xml:id"));
@@ -57,8 +57,8 @@ public class ExtractSpeeches {
       }
    }
 
-   private static List extractComments(Element speech) {
-      List<String> comments = new ArrayList();
+   private static List<String> extractComments(Element speech) {
+      List<String> comments = new ArrayList<>();
 
       for(Element el : speech.getAllElements()) {
          if (el != speech && isComment(el)) {
@@ -75,7 +75,7 @@ public class ExtractSpeeches {
    private static String buildPlainSpeechText(Element speech) {
       Element clone = speech.clone();
 
-      for(Element el : new ArrayList(clone.getAllElements())) {
+      for(Element el : new ArrayList<>(clone.getAllElements())) {
          if (el != clone && isComment(el)) {
             el.remove();
          }
@@ -123,9 +123,9 @@ public class ExtractSpeeches {
       return "";
    }
 
-   public static record ParsedProtocol(String sourceUrl, String legislatureperiod, String session, String date, List speeches) {
+   public static record ParsedProtocol(String sourceUrl, String legislatureperiod, String session, String date, List<ParsedSpeech> speeches) {
    }
 
-   public static record ParsedSpeech(String speechKey, String protocolSourceUrl, String speechId, String speakerName, String fraction, String date, String agendaItem, String text, List comments) {
+   public static record ParsedSpeech(String speechKey, String protocolSourceUrl, String speechId, String speakerName, String fraction, String date, String agendaItem, String text, List<String> comments) {
    }
 }

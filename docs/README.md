@@ -13,7 +13,3 @@ The Multimodal Parliament Explorer combines parliamentary text, member metadata,
 - Render a dashboard with d3.js visualizations.
 
 Use [Getting Started](getting-started.md) to configure and run the application.
-
-## Source code
-
-The source repository is available on [GitHub](https://github.com/mahkameh13/Multimodal-Parliament-Explorer). Access is restricted to repository collaborators.

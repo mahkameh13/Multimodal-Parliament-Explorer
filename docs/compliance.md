@@ -2,7 +2,7 @@
 
 ## Licensing status
 
-The project cannot be treated as open source until a root `LICENSE` file is present and every copyright holder has authorized that license. Source comments identify contributions from multiple group members, so one contributor cannot safely license the complete repository alone.
+The project cannot be treated as open source until a root `LICENSE` file is present and every copyright holder has authorized that license. Removing names or attribution comments does not transfer copyright or replace that authorization.
 
 The direct DUUI and Text Technology Lab UIMA TypeSystem dependencies use `AGPL-3.0-or-later`. Any project license must be compatible with those dependencies. See [Third-Party Notices](../THIRD_PARTY_NOTICES.md).
 
@@ -15,8 +15,8 @@ The software license does not grant rights to Bundestag data, photographs, video
 - Obtain written publication and license approval from every contributor.
 - Confirm that publication complies with the applicable course and institutional rules.
 - Add the approved compatible license and copyright notices.
-- Remove downloaded data and media from the complete public Git history.
-- Run a secret scan across the complete public Git history.
+- Publish only the sanitized single-commit release history; do not expose the earlier project history.
+- Run a secret and personal-data scan across that release history.
 - Generate a dependency inventory or SBOM from the release revision.
 - Complete `mvn clean verify` in a clean environment.
 - Review all screenshots, examples, and generated artifacts for third-party rights and personal data.

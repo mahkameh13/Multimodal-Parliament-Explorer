@@ -12,7 +12,7 @@ import mongodbConnection.MongodbConfig;
 public class ProtocolTimer {
    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
    private final MongoDatabaseHandler db;
-   private final Set ajaxBaseUrls;
+   private final Set<String> ajaxBaseUrls;
 
    public ProtocolTimer(MongodbConfig config, importerConfig impConfig) {
       this.db = new MongoDatabaseHandler(config);
@@ -23,7 +23,7 @@ public class ProtocolTimer {
       this.scheduler.scheduleAtFixedRate(() -> runOnce(this.db, this.ajaxBaseUrls), 0L, periodMinutes, TimeUnit.MINUTES);
    }
 
-   private static void runOnce(MongoDatabaseHandler db, Set ajaxBaseUrls) {
+   private static void runOnce(MongoDatabaseHandler db, Set<String> ajaxBaseUrls) {
       try {
          ReadSpeechAndProtocol importer = new ReadSpeechAndProtocol(db);
          int imported = 0;

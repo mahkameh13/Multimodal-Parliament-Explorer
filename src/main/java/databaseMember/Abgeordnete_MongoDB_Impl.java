@@ -32,7 +32,7 @@ public class Abgeordnete_MongoDB_Impl implements AbgeordneteInterface {
       this.document = document;
    }
 
-   public static void addAbgeordnete(MongoDatabaseHandler db, List abgeordneteList) {
+   public static void addAbgeordnete(MongoDatabaseHandler db, List<Abgeordnete> abgeordneteList) {
       for(Abgeordnete abgeordneter : abgeordneteList) {
          Abgeordnete_MongoDB_Impl abgeordneteMongoDB = new Abgeordnete_MongoDB_Impl(abgeordneter);
 

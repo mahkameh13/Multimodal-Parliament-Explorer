@@ -1,5 +1,4 @@
 // Visualisierungen für Dashboard (Aufgabe 3.1.a)
-// Autor: Mahkameh Momeni
 
 // Radar Chart – Topics
 function drawTopicRadar(selector, topics) {
@@ -242,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ----- Suche (Aufgabe 3.1.c) -----
-// Autor: Mahkameh Momeni
 
 function renderSearchResults(items) {
     const container = document.getElementById("searchResults");
@@ -316,8 +314,6 @@ function performSearch() {
     const query = input.value.trim();
     const params = new URLSearchParams();
     if (query) params.set("query", query);
-
-    // TODO: später fromDate, toDate, fraction aus Filterfeldern ergänzen
 
     fetch("/api/search/speeches?" + params.toString())
         .then(r => r.json())

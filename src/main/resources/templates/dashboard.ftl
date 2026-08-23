@@ -1,13 +1,8 @@
-<#--
-    Author parameter
-    Autor: Mahkameh Momeni
--->
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Multimodal Parliament Explorer – Dashboard</title>
-    <meta name="author" content="Mahkameh Momeni">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="/static/css/styles.css"><!-- optional -->
     <style>
@@ -123,7 +118,7 @@
         </p>
     </section>
 
-    <!-- Suchergebnisse (Aufgabe 3.1.c, Mahkameh Momeni) -->
+    <!-- Suchergebnisse -->
     <section id="searchResultsSection">
         <h2 class="section-title">Suchergebnisse</h2>
         <div id="searchResults"></div>
@@ -177,8 +172,7 @@
 </main>
 
 <footer>
-    © 2026 Multimodal Parliament Explorer. Alle Rechte vorbehalten. <br>
-    <span>Autor: Mahkameh Momeni</span>
+    © 2026 Multimodal Parliament Explorer
 </footer>
 
 <script src="/js/visualization.js"></script>
