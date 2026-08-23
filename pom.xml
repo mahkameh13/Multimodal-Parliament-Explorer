@@ -18,7 +18,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.json>20250517</version.json>
-        <duui.version>1.5.3</duui.version>
+        <duui.version>1.5.5</duui.version>
         <typesystem.version>3.0.14</typesystem.version>
     </properties>
 
