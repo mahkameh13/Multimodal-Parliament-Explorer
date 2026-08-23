@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: Multimodal Parliament Explorer API
+  description: API for accessing speeches, members and nlp analyzation.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:7000
+    description: Local server
+
+paths:
+
+  /api/member:
+    get:
+      summary: Get member by speech id
+      parameters:
+        - name: speechid
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Member document
+          content:
+            application/json:
+              schema:
+                type: object
+
+    post:
+      summary: Create a member
+      responses:
+        "200":
+          description: Member created
+
+    delete:
+      summary: Delete member by speech id
+      parameters:
+        - name: speechid
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Member deleted
+
+
+  /api/speech:
+    get:
+      summary: Get speech by id
+      parameters:
+        - name: speechid
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Speech document
+          content:
+            application/json:
+              schema:
+                type: object
+
+    post:
+      summary: Create speech
+      responses:
+        "200":
+          description: Speech created
+
+    delete:
+      summary: Delete speech
+      parameters:
+        - name: speechid
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Speech deleted
+
+
+  /api/visualization/topics:
+    get:
+      summary: Topic distribution
+      parameters:
+        - name: speechIds
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: topic
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Topic distribution
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: number
+
+
+  /api/visualization/pos:
+    get:
+      summary: POS distribution
+      parameters:
+        - name: speechIds
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: topic
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: POS counts
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+
+
+  /api/visualization/sentiment:
+    get:
+      summary: Sentiment distribution
+      parameters:
+        - name: speechIds
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: topic
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Sentiment scores
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: number
+
+
+  /api/visualization/namedEntities:
+    get:
+      summary: Named entity statistics
+      parameters:
+        - name: speechIds
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: topic
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Named entity counts
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
